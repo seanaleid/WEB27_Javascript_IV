@@ -69,11 +69,49 @@ class Parent {
     }
 } // this closes the parent
 
+class Child extends Parent{
+    constructor(genes){
+        super(genes) // this replaces parent.call
+        this.major = genes.major
+    }// this is where any special methods for the child go
+    study(){
+        return `${this.name} is studying ${this.major}`;
+    }
+}
+
+class Grandchild extends Child{
+    constructor(genes){
+        super(genes);
+        this.toy = genes.toy
+    }
+    play(){ 
+        return `${this.name} plays with ${this.toy}`
+    }
+}
+
 const mom = new Parent({
     name: 'Mom',
     location: 'USA',
     work: 'Computer Programmer'
 })
 
-console.log(mom.job());
+const child = new Child({
+    name: 'Me',
+    location: 'USA',
+    work: 'student',
+    major: 'Computer Science'
+})
 
+const grandBaby = new Grandchild({
+    name: 'Jake',
+    location: 'USA',
+    work: 'baby',
+    major: 'first words',
+    toy: 'binky'
+})
+
+console.log(mom.job());
+console.log(child.job(), 'and', child.study());
+console.log(grandBaby.job());
+console.log(grandBaby.study());
+console.log(grandBaby.play());
